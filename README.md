@@ -1,3 +1,97 @@
+laravel Practise 01
+
+composer create-project laravel/laravel lsapp - create laravel project
+cd lsapp - go to root location
+
+
+we can edit route path as bellow
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/hello', function () {
+    return ('<h1>Hellow Madusha</h1>');
+});
+
+create route for view
+
+      view 
+          about.blade.php
+      route
+           Route::get('/about', function () {
+    return view('about');
+});
+
+
+Create Dynamic Route
+          Route::get('/users/{id}', function ($id) {
+    return 'This is user '.$id;
+});
+       you can pass more than one valuse
+
+        Route::get('/users/{id}/{name}', function ($id,$name) {
+    return 'This is user '.$id .'This is user Name'.$name;
+});
+
+
+create controller using php artisan'
+
+     php artisan make:controller PagesController 
+
+
+
+       - in pagescontroller
+           
+
+class PagesController extends Controller
+{
+    //
+    public function index(){
+
+        return view('pages.index');
+    }
+}
+
+
+in route 
+
+use App\Http\Controllers\PagesController;
+
+//Route::get('/', 'PagesController@index');
+//[UserController::class, 'index']
+Route::get('/', [PagesController::class, 'index']);
+
+
+create about us and services  using pagecontroller
+
+    -router 
+     Route::get('/about', [PagesController::class, 'about']);
+Route::get('/services', [PagesController::class, 'services']);
+
+
+ -pagecontroller 
+     class PagesController extends Controller
+{
+    //
+    public function index(){
+
+        return view('pages.index');
+    }
+
+    public function about(){
+
+        return view('pages.about');
+    }
+    public function services(){
+
+        return view('pages.services');
+    }
+}
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
