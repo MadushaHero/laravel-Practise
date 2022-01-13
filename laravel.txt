@@ -1,0 +1,129 @@
+video 01
+
+wamp install
+getcomposer
+git install'
+vs code install
+
+setting -> terminal git bash vscode
+
+cd command to >> /c/xampp/htdocs
+composer create-project laravel/laravel lsapp - create laravel project
+cd lsapp - go to root location
+
+httpd-vhosts.conf  file edit in C:\xampp\apache\conf\extra 
+
+<VirtualHost *:80>
+   
+   DocumentRoot "C:/xampp/htdocs/lsapp/public"
+   ServerName lsapp.dev
+ 
+</VirtualHost>
+
+<VirtualHost *:80>
+   
+   DocumentRoot "C:/xampp/htdocs/"
+   ServerName localhost
+ 
+</VirtualHost>
+
+Change host in system 32
+
+video 02
+
+we can edit route path as bellow
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/hello', function () {
+    return ('<h1>Hellow Madusha</h1>');
+});
+
+create route for view
+
+      view 
+          about.blade.php
+      route
+           Route::get('/about', function () {
+    return view('about');
+});
+
+
+Create Dynamic Route
+          Route::get('/users/{id}', function ($id) {
+    return 'This is user '.$id;
+});
+       you can pass more than one valuse
+
+        Route::get('/users/{id}/{name}', function ($id,$name) {
+    return 'This is user '.$id .'This is user Name'.$name;
+});
+
+
+create controller using php artisan'
+
+     php artisan make:controller PagesController 
+
+
+
+       - in pagescontroller
+           
+
+class PagesController extends Controller
+{
+    //
+    public function index(){
+
+        return view('pages.index');
+    }
+}
+
+
+in route 
+
+use App\Http\Controllers\PagesController;
+
+//Route::get('/', 'PagesController@index');
+//[UserController::class, 'index']
+Route::get('/', [PagesController::class, 'index']);
+
+
+create about us and services  using pagecontroller
+
+    -router 
+     Route::get('/about', [PagesController::class, 'about']);
+Route::get('/services', [PagesController::class, 'services']);
+
+
+ -pagecontroller 
+     class PagesController extends Controller
+{
+    //
+    public function index(){
+
+        return view('pages.index');
+    }
+
+    public function about(){
+
+        return view('pages.about');
+    }
+    public function services(){
+
+        return view('pages.services');
+    }
+}
+
+
+
+
+
+
+      
+
+
+
+
+
